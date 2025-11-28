@@ -1,0 +1,126 @@
+import React, { useState } from "react";
+import "./App.css";
+
+import { Card, Butto, User } from "./componet";
+
+function App() {
+  const [text1, setText1] = useState("Assalomu aleykum");
+  const toggleText1 = () => {
+    setText1(text1 === "Assalomu aleykum" ? "Valeykum assalom" : "Assalomu aleykum");
+  };
+
+  const [bgColor, setBgColor] = useState("brown");
+  const toggleColor = () => {
+    setBgColor(bgColor === "brown" ? "darkblue" : "brown");
+  };
+
+  // 🟩 Yangi qo‘shilgan count state — xato shu yerda edi!
+  const [count, setCount] = useState(0);
+
+  const [job, setJob] = useState("Frontend Developer");
+
+  const [showPass, setShowPass] = useState(false);
+  const [password] = useState("123456");
+  const togglePassword = () => {
+    setShowPass(!showPass);
+  };
+
+  const [lang, setLang] = useState("hello");
+  const toggleLang = () => {
+    setLang(lang === "hello" ? "salom" : "hello");
+  };
+
+  const [harf, setHarf] = useState("frontend");
+  const toggleCase = () => {
+    setHarf(harf === "frontend" ? "FRONTEND" : "frontend");
+  };
+
+  const [boxSize, setBoxSize] = useState("100px");
+  const toggleSize = () => {
+    setBoxSize(boxSize === "100px" ? "200px" : "100px");
+  };
+
+  const [btnText, setBtnText] = useState("Yoqish");
+  const toggleBtn = () => {
+    setBtnText(btnText === "Yoqish" ? "O‘chirish" : "Yoqish");
+  };
+
+  const [salom, alik] = useState([
+    { title: "Hojiakbar", id: 1 },
+    { title: "Javlon", id: 2 },
+    { title: "Sasha", id: 3 },
+    { title: "Sardor", id: 4 },
+    { title: "Mustafo", id: 5 },
+    { title: "Mansur", id: 6 }
+  ]);
+
+  const deletee = (id) => {
+    alik((pre) => pre.filter((event) => event.id !== id));
+  };
+
+  return (
+    <div style={{ padding: "30px" }}>
+      <Card />
+      <Butto />
+      <User />
+
+      <h1> 1. Matnni almashtirish</h1>
+      <h2>{text1}</h2>
+      <button onClick={toggleText1}>Almashtir</button>
+
+      <h1> 2. Rang almashtiruvchi funksiya</h1>
+      <div style={{ width: "150px", height: "80px", background: bgColor }}></div>
+      <button onClick={toggleColor}>Rangni o‘zgartir</button>
+
+      {/* COUNT QISMI */}
+      <div>
+        <h1>{count}</h1>
+        <button onClick={() => setCount(count + 1)}>+</button>
+        <button onClick={() => setCount(count - 1)}>-</button>
+      </div>
+
+      <h1> 3. Ikki tugmali matn boshqaruv</h1>
+      <h2>{job}</h2>
+      <button onClick={() => setJob("React Developer")}>React Developer</button>
+      <button onClick={() => setJob("JavaScript Developer")}>JavaScript Developer</button>
+
+      <h1> 4. Parolni ko‘rsat/yashirish</h1>
+      <h2>{showPass ? password : "******"}</h2>
+      <button onClick={togglePassword}>{showPass ? "Yashirish" : "Ko‘rsatish"}</button>
+
+      <h1> 5. Tilni almashtirish</h1>
+      <h2>{lang}</h2>
+      <button onClick={toggleLang}>Tilni o‘zgartir</button>
+
+      <h1> 6. Katta/kichik harf</h1>
+      <h2>{harf}</h2>
+      <button onClick={toggleCase}>Harfni o‘zgartir</button>
+
+      <h1> 7. Div o‘lchamini o‘zgartirish</h1>
+      <div
+        style={{
+          width: boxSize,
+          height: boxSize,
+          background: "darkgreen",
+        }}
+      ></div>
+      <button onClick={toggleSize}>Hajmni o‘zgartir</button>
+
+      <h1> 8. Tugma matnini almashtirish</h1>
+      <button onClick={toggleBtn}>{btnText}</button>
+
+      <h1> 9. Listdan elementni o‘chirish</h1>
+      <div>
+        {salom.map((sat) => (
+          <div key={sat.id}>
+            <h2>{sat.title}</h2>
+            <button onClick={() => deletee(sat.id)}>O‘chirish</button>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  );
+}
+
+export default App;
